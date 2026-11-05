@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "booktop"
+version = "0.1.0"
+description = "A live order book in your terminal: crypto depth ladders, trade tape and flow, plus NASDAQ ITCH replay"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Arka Khorchidian" }]
+requires-python = ">=3.10"
+dependencies = ["textual>=0.80", "websockets>=13"]
+keywords = ["order-book", "terminal", "tui", "crypto", "bitcoin", "market-data", "trading", "kraken", "coinbase", "nasdaq", "itch"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Financial and Insurance Industry",
+  "Programming Language :: Python :: 3",
+  "Topic :: Office/Business :: Financial :: Investment",
+  "Topic :: Terminals",
+]
+
+[project.optional-dependencies]
+itch = ["fastitch>=0.1", "polars>=0.20"]
+test = ["pytest>=7", "fastitch>=0.1", "polars>=0.20"]
+
+[project.scripts]
+booktop = "booktop.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/ArkaKhorchidian/booktop"
+Issues = "https://github.com/ArkaKhorchidian/booktop/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/booktop"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["docs", "rec", ".github"]
